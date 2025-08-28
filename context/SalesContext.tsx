@@ -22,7 +22,6 @@ type props = {
     setReservations: React.Dispatch<React.SetStateAction<Reserv[]>>
     addToReserve: (id:string | undefined, checkIn:string , checkOut:string , quantity:number , title: string | undefined , address: string | undefined , total: number , img: (string | StaticImageData )[] | undefined)=> void;
     deleteReserve: (index:number)=> void;
-    updateReserve : (index: number , updateditem:Reserv)=> void;
     token: string | null;
     setToken: React.Dispatch<React.SetStateAction<string | null>>
 }
@@ -66,9 +65,7 @@ export default function SalesContextProvider({children}:{children: React.ReactNo
         setReservations(updated)
     }
 
-    const updateReserve = (index: number , updateItem:Reserv)=>{
-        setReservations((prev)=> prev.map((item , i)=> i === index ? {...item , ...updateItem} : item))
-    }
+
 
 
     useEffect(()=>{
@@ -91,7 +88,7 @@ export default function SalesContextProvider({children}:{children: React.ReactNo
 
     console.log(reservations)
   return (
-    <salesContext.Provider value={{myData , setMyData , reservations , setReservations , addToReserve , deleteReserve , updateReserve , token , setToken}}>
+    <salesContext.Provider value={{myData , setMyData , reservations , setReservations , addToReserve , deleteReserve , token , setToken}}>
         {children}
     </salesContext.Provider>
   )

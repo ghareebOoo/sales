@@ -20,7 +20,7 @@ type Reserv = {
 }
 
 export default function Reservations() {
-  const { reservations, deleteReserve, updateReserve } = useDepartment()
+  const { reservations, deleteReserve, setReservations } = useDepartment()
 
   const [showWarning, setShowWarning] = useState<number | null>(null)
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
@@ -32,14 +32,17 @@ export default function Reservations() {
     setFormData(item);
   }
 
-  const saveEdit = () => {
-    if (editingIndex !== null && formData) {
-      toast.success("Updated and saved successfully")
-      updateReserve(editingIndex, formData)
-      setEditingIndex(null)
-      setFormData(null)
-    }
+ const saveEdit = () => {
+  if (editingIndex !== null && formData) {
+    setReservations(prev =>
+      prev.map((item, i) => i === editingIndex ? {...item, ...formData} : item)
+    )
+    toast.success("Updated and saved successfully")
+    setEditingIndex(null)
+    setFormData(null)
   }
+}
+
 
   return (
     <div className="px-4 md:px-8 pt-40 pb-10">
