@@ -20,7 +20,7 @@ type props = {
     setMyData: React.Dispatch<React.SetStateAction<DummyProperties[]>>
     reservations: Reserv[];
     setReservations: React.Dispatch<React.SetStateAction<Reserv[]>>
-    addToReserve: (id:string , checkIn:string , checkOut:string , quantity:number , title: string , address: string , total: number , img: (string | StaticImageData )[])=> void;
+    addToReserve: (id:string | undefined, checkIn:string , checkOut:string , quantity:number , title: string | undefined , address: string | undefined , total: number , img: (string | StaticImageData )[] | undefined)=> void;
     deleteReserve: (index:number)=> void;
     updateReserve : (index: number , updateditem:Reserv)=> void;
     token: string | null;
@@ -43,7 +43,7 @@ export default function SalesContextProvider({children}:{children: React.ReactNo
         fetchedData()
     },[fetchedData])
 
-    const addToReserve = (id:string , checkIn:string , checkOut:string , quantity: number , title: string , address: string , total: number , img: (string | StaticImageData )[] )=>{
+    const addToReserve = (id:string | undefined , checkIn:string , checkOut:string , quantity: number , title: string | undefined, address: string | undefined, total: number , img: (string | StaticImageData )[] | undefined )=>{
 
         const myReverse = {
             id: id,

@@ -31,7 +31,7 @@ export default function DepartmentDetails({id}:{id: string}) {
     if(checkIn === "" || checkOut === ""){
       toast.error("Check-in and check-out dates are required.")
     }else{
-      addToReserve(myDepartment?._id , checkIn , checkOut , quantity , myDepartment?.title , myDepartment?.address , myDepartment?.price.rent , myDepartment?.images)
+      addToReserve(myDepartment?._id , checkIn , checkOut , quantity , myDepartment?.title , myDepartment?.address , myDepartment?.price.rent ?? 0 , myDepartment?.images)
       toast.success("Booking completed successfully.")
     }
   }
