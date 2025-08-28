@@ -5,14 +5,14 @@ import {DummyProperties}  from "../types"
 import { StaticImageData } from 'next/image'
 
 type Reserv = {
-    id?: string | undefined;
+    id?: string;
     checkIn? : string;
     checkOut?: string;
     quantity?: number;
-    title?: string | undefined;
-    address?: string | undefined;
-    total?: number | undefined;
-    img?: (string | StaticImageData )[] | undefined;
+    title?: string;
+    address?: string;
+    total?: number;
+    img?: (string | StaticImageData )[];
 }
 
 type props = {
@@ -20,7 +20,7 @@ type props = {
     setMyData: React.Dispatch<React.SetStateAction<DummyProperties[]>>
     reservations: Reserv[];
     setReservations: React.Dispatch<React.SetStateAction<Reserv[]>>
-    addToReserve: (id:string | undefined , checkIn:string , checkOut:string , quantity:number , title: string | undefined , address: string | undefined , total: number | undefined , img: (string | StaticImageData )[] | undefined)=> void;
+    addToReserve: (id:string , checkIn:string , checkOut:string , quantity:number , title: string , address: string , total: number , img: (string | StaticImageData )[])=> void;
     deleteReserve: (index:number)=> void;
     updateReserve : (index: number , updateditem:Reserv)=> void;
     token: string | null;
@@ -43,7 +43,7 @@ export default function SalesContextProvider({children}:{children: React.ReactNo
         fetchedData()
     },[fetchedData])
 
-    const addToReserve = (id:string | undefined, checkIn:string , checkOut:string , quantity: number , title: string | undefined , address: string | undefined, total: number | undefined , img: (string | StaticImageData )[] | undefined)=>{
+    const addToReserve = (id:string , checkIn:string , checkOut:string , quantity: number , title: string , address: string , total: number , img: (string | StaticImageData )[] )=>{
 
         const myReverse = {
             id: id,
@@ -66,9 +66,9 @@ export default function SalesContextProvider({children}:{children: React.ReactNo
         setReservations(updated)
     }
 
-   const updateReserve = (index: number, updatedItem: Partial<Reserv>) => {
-    setReservations((prev) => prev.map((item, i) => (i === index ? { ...item, ...updatedItem } : item)));
-  };
+    const updateReserve = (index: number , updateItem:Reserv)=>{
+        setReservations((prev)=> prev.map((item , i)=> i === index ? {...item , ...updateItem} : item))
+    }
 
 
     useEffect(()=>{

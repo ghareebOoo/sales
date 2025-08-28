@@ -76,24 +76,24 @@ export default function Login() {
     } 
 
 
-    const getIp = async (): Promise<string> => {
-        try {
-            const res = await fetch("https://api.ipify.org?format=json", { cache: "no-store" });
-            const data = await res.json();
-            return data?.ip ?? "unknown";
-        } catch {
-            return "unknown";
+    const getIp = async():Promise<string>=>{
+        try{
+            const response = await fetch("https://api.ipify.org?format=json" , {cache: "no-store"})
+            const data = await response.json()
+            return data?.id ?? "unKnown"
+        }catch{
+            return "unknown"
         }
-    };
+    }
 
     const handelLogin = async (values:ourLogin)=>{
        
         const id = toast.loading("Trying To Login")
-        const parser = new UAParser();
-        const browser = parser.getBrowser();
-        const device = parser.getDevice();
-        const os = parser.getOS();
-        const ip = await getIp();
+        const parser = new UAParser()
+        const browser = parser.getBrowser()
+        const device = parser.getDevice()
+        const os = parser.getOS()
+        const ip = await getIp()
         try{
             const options = {
                 url: "https://ecommerce.routemisr.com/api/v1/auth/signin",
@@ -101,12 +101,14 @@ export default function Login() {
                 data:{
                     email: values.email,
                     password: values.password,
-                    deviceType: device.type || "desktop",
-                    deviceModel: device.model || "unknown",
-                    browser: browser.name,
-                    browserVersion: browser.version,
-                    os: os.name + " " + os.version,
-                    ipAddress: ip,
+                    browserName: browser.name,
+                    borwserVergin: browser.version,
+                    borwserMajor: browser.major,
+                    browserType: browser.type,
+                    deviceType: device.type,
+                    deviceModel: device.model,
+                    os: os.name + "" + os.version,
+                    ipAddress: ip
                 }
             }
 
