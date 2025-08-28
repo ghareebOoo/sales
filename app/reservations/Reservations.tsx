@@ -6,6 +6,7 @@ import pin from '../../public/src/assets/pin.svg'
 import close from '../../public/src/assets/close.svg'
 import update from '../../public/src/assets/update-alt-svgrepo-com.svg'
 import save from '../../public/src/assets/save-02-svgrepo-com.svg'
+import toast from "react-hot-toast";
 
 type Reserv = {
     id?: string ;
@@ -26,12 +27,14 @@ export default function Reservations() {
   const [formData, setFormData] = useState<Reserv | null>(null)
 
   const startEdit = (index: number, item: Reserv) => {
+    toast.success("Now you can change")
     setEditingIndex(index)
     setFormData(item);
   }
 
   const saveEdit = () => {
     if (editingIndex !== null && formData) {
+      toast.success("Updated and saved successfully")
       updateReserve(editingIndex, formData)
       setEditingIndex(null)
       setFormData(null)
@@ -54,6 +57,7 @@ export default function Reservations() {
                 <div className="absolute bottom-2 w-[95%] flex items-center justify-between">
                   <button
                     onClick={() => {
+                      toast.success("Deleted Successfully")
                       setShowWarning(null)
                       deleteReserve(index)
                     }}

@@ -109,9 +109,9 @@ useEffect(()=>{
                     
                 </div>
 
-                {token ? <div onClick={() => { setToken(null); localStorage.removeItem("token");}} className="cursor-pointer flex items-center justify-center gap-2 px-4 h-[50px] rounded-full bg-primary-dull transition-all duration-500 hover:bg-secondary">
+                {token ? <div onClick={() => { setToken(null); localStorage.removeItem("token");}} className="cursor-pointer flex items-center justify-center gap-2 px-3 h-[50px] rounded-full bg-primary-dull transition-all duration-500 hover:bg-secondary">
                     <span className="text-base font-mediu">Log out</span>
-                    <Image src={userCircle} alt='user-icon' width={30} height={30} className='w-[30px]'/></div>  : <Link href={"/login"} className='cursor-pointer flex items-center justify-center gap-2 px-4 h-[50px] rounded-full bg-secondary transition-all duration-500 hover:bg-primary-dull'>
+                    <Image src={userCircle} alt='user-icon' width={30} height={30} className='w-[30px]'/></div>  : <Link href={"/login"} className='cursor-pointer flex items-center justify-center gap-2 px-3 h-[50px] rounded-full bg-secondary transition-all duration-500 hover:bg-primary-dull'>
                     <span className='text-base font-medium'>Login</span>
                     <Image src={user} alt='user-icon' width={30} height={30} className='w-[30px]'/>
                 </Link>}
