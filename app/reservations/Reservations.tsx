@@ -7,18 +7,17 @@ import close from '../../public/src/assets/close.svg'
 import update from '../../public/src/assets/update-alt-svgrepo-com.svg'
 import save from '../../public/src/assets/save-02-svgrepo-com.svg'
 import toast from "react-hot-toast";
-
+import { motion, AnimatePresence} from 'framer-motion';
 type Reserv = {
-    id?: string ;
-    checkIn? : string;
-    checkOut?: string;
-    quantity?: number;
-    title?: string;
-    address?: string;
-    total?: number;
-    img?: (string | StaticImageData )[];
+  id?: string ;
+  checkIn? : string;
+  checkOut?: string;
+  quantity?: number;
+  title?: string;
+  address?: string;
+  total?: number;
+  img?: (string | StaticImageData )[];
 }
-
 export default function Reservations() {
   const { reservations, deleteReserve, setReservations } = useDepartment()
 
@@ -43,15 +42,19 @@ export default function Reservations() {
   }
 }
 
-
   return (
     <div className="px-4 md:px-8 pt-40 pb-10">
       <div className="grid grid-cols-1 gap-8">
+        <AnimatePresence>
         {reservations.map((item: Reserv, index) => (
-          <div
-            key={index}
-            className="bg-white shadow-md rounded-md pt-4 relative"
-          >
+          <motion.div key={index}   drag="x"
+            onDragEnd={(e, info) => { if (Math.abs(info.offset.x) > 100) { deleteReserve(index) }}}
+            dragConstraints={{left: 0 , right:0}}
+            whileDrag={{ scale: 1.03 }}
+            initial={{ x: 0, opacity: 1 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 1 , type: "spring"}} 
+            className="bg-white shadow-md rounded-md pt-4 relative">
             {showWarning === index && (
               <div className="absolute w-fit top-0 right-0 bg-primary h-[100px] rounded-md p-2.5">
                 <div className="text-base font-semibold">
@@ -234,8 +237,9 @@ export default function Reservations() {
                 </button>
               )}
             </div>
-          </div>
+          </motion.div>
         ))}
+        </AnimatePresence>
       </div>
     </div>
   )
